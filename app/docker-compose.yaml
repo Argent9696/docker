@@ -7,7 +7,7 @@ services:
     networks:
       - grafana-network1
     ports:
-      - "8000:8000"  # Правильный формат для проброса портов
+      - "8000:8000"  
 
 networks:
   grafana-network1:
