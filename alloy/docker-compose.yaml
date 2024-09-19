@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  alloy:
+    image: grafana/alloy:latest
+    hostname: alloy
+    container_name: alloy
+    command: "run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/alloy.yaml"
+    ports:
+      - 0.0.0.0:12345:12345
+      - 0.0.0.0:12201:12201/tcp
+      - 0.0.0.0:12201:12201/udp
+      - 0.0.0.0:514:514/tcp
+      - 0.0.0.0:514:514/udp
+      - 0.0.0.0:4317:4317  # OTLP port for receiving traces
+      - 0.0.0.0:4318:4318
+    volumes:
+      - ./alloy.yaml:/etc/alloy/alloy.yaml
+      - /data_prometh/grafana-alloy:/var/lib/alloy/data
+    networks:
+      grafana-network1:
+        aliases:
+          - alloy
+    restart: unless-stopped
+
+
+networks:
+  grafana-network1:
+    external: true
