@@ -13,11 +13,11 @@ services:
     ports:
       - "3200:3200"
     networks:
-      grafana-network1:
+      grafana:
         aliases:
           - tempo
     command: ["-config.file=/etc/tempo/tempo.yaml"]
     restart: unless-stopped
 networks:
-  grafana-network1:
+  grafana:
     external: true
