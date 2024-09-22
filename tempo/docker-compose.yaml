@@ -5,6 +5,11 @@ services:
     container_name: tempo
     volumes:
     - ./tempo.yaml:/etc/tempo/tempo.yaml
+    - /var/lib/tempo/data:/data_prometh/grafana-tempo
+    - /var/tempo/generator/wal:/data_prometh/grafana-tempo/generator/wal
+    - /var/tempo/generator/traces:/data_prometh/grafana-tempo/generator/traces
+    - /var/tempo/wal:/data_prometh/grafana-tempo/wal
+    - /var/tempo/blocks/data_prometh/grafana-tempo/blocks
     ports:
       - "3200:3200"
     networks:
